@@ -9,11 +9,13 @@ messages = {
 }
 
 commands = {
-    '/day_hw': 'bot.send_message(m.chat.id, "выберите день", reply_markup=day_key)'
+    '/day_hw': 'bot.send_message(m.chat.id, "выберите день", reply_markup=day_key)',
+    '/start': 'bot.send_message(m.chat.id, "нажмите /")'
 }
 
 debug = {
-    '/reset': 'reset()'
+    '/reset': 'reset()',
+    '/stats': 'bot.send_message(m.chat.id, func.stats())'
 }
 
 current_chat = 0
@@ -28,9 +30,6 @@ def reset():
     waiter = False
 
 
-bot = telebot.TeleBot(TOKEN)
-
-
 def listener(m):
     for msg in m:
         if msg.content_type == 'text':
@@ -40,6 +39,7 @@ def listener(m):
                 mess.close()
 
 
+bot = telebot.TeleBot(TOKEN)
 bot.set_update_listener(listener)
 
 

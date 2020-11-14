@@ -1,9 +1,9 @@
 from telebot import types
 from datetime import datetime
 
-TOKEN = ''
-EDITORS = []
-BLACK_LIST = []
+TOKEN = '1384356348:AAEX53xcrjNJzPcNxoAYOnsV3mQxzd5h0Hs'
+EDITORS = [976798046, 1311758742]
+BLACK_LIST = [470540326]
 
 
 class DataBase:
@@ -40,13 +40,13 @@ class DataBase:
                         sub[6],
                         sub[11]],
 
-        'вторник': [sub[8],
+        'вторник': [sub[1],
                     sub[15],
                     sub[8],
-                    sub[1],
+                    sub[11],
                     sub[2],
                     sub[12],
-                    sub[10]],
+                    sub[12]],
 
         'среда': [sub[2],
                   sub[2],
@@ -71,10 +71,10 @@ class DataBase:
                     sub[2],
                     sub[15]],
 
-        'суббота': [sub[14],
-                    sub[9],
+        'суббота': [sub[9],
+                    sub[8],
                     sub[4],
-                    sub[8]]
+                    sub[14]]
     }
 
     # timetable
@@ -89,8 +89,8 @@ class DataBase:
     # methods
     def timetable_out(self):
         answer = ''
-        for i in range(len(self.timetable)):
-            answer += self.timetable[i]
+        for time in range(len(self.timetable)):
+            answer += self.timetable[time]
             answer += '\n'
         return answer
 
@@ -99,8 +99,8 @@ class DataBase:
         for k, v in self.schedule.items():
             answer += k.capitalize() + '\n'
             count = 1
-            for i in v:
-                answer += f'{count}) {i.capitalize()} \n'
+            for s in v:
+                answer += f'{count}) {s.capitalize()} \n'
                 count += 1
             answer += '\n'
         return answer
@@ -122,10 +122,19 @@ class DataBase:
         answer = list(self.schedule.keys())[date].capitalize()
         answer += '\n' + '\n'
         count = 1
-        for i in self.schedule[list(self.schedule.keys())[date]]:
-            answer += f'{count}) {i.capitalize()}\n'
-            answer += self.hw[i] + '\n' + '\n'
+        for s in self.schedule[list(self.schedule.keys())[date]]:
+            answer += f'{count}) {s.capitalize()}\n'
+            answer += self.hw[s] + '\n' + '\n'
             count += 1
+        return answer
+
+    @staticmethod
+    def stats():
+        with open('messages.txt', 'r') as file:
+            answer = ''
+            for line in file:
+                answer += line + '\n'
+            file.close()
         return answer
 
     def save(self):
@@ -136,9 +145,9 @@ class DataBase:
 
     def load(self):
         with open('data.txt', 'r') as file:
-            for i in self.sub:
-                self.hw[i] = file.readline().replace('\n', '')
-                self.hw[i] = self.hw[i].replace(' <3 ', '\n')
+            for line in self.sub:
+                self.hw[line] = file.readline().replace('\n', '')
+                self.hw[line] = self.hw[line].replace(' <3 ', '\n')
             file.close()
 
 
