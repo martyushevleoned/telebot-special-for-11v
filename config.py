@@ -1,9 +1,9 @@
 from telebot import types
 from datetime import datetime
 
-TOKEN = '1384356348:AAEX53xcrjNJzPcNxoAYOnsV3mQxzd5h0Hs'
-EDITORS = [976798046, 1311758742]
-BLACK_LIST = [470540326]
+TOKEN = ''
+EDITORS = []
+BLACK_LIST = []
 
 
 class DataBase:
