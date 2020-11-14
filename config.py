@@ -128,15 +128,6 @@ class DataBase:
             count += 1
         return answer
 
-    @staticmethod
-    def stats():
-        with open('messages.txt', 'r') as file:
-            answer = ''
-            for line in file:
-                answer += line + '\n'
-            file.close()
-        return answer
-
     def save(self):
         with open('data.txt', 'w') as file:
             for v in self.hw.values():

@@ -14,8 +14,7 @@ commands = {
 }
 
 debug = {
-    '/reset': 'reset()',
-    '/stats': 'bot.send_message(m.chat.id, func.stats())'
+    '/reset': 'reset()'
 }
 
 current_chat = 0
