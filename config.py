@@ -68,7 +68,7 @@ class DataBase:
                     sub[3],
                     sub[3],
                     sub[4],
-                    sub[2],
+                    sub[10],
                     sub[15]],
 
         'суббота': [sub[9],
