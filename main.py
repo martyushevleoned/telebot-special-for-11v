@@ -29,17 +29,7 @@ def reset():
     waiter = False
 
 
-def listener(m):
-    for msg in m:
-        if msg.content_type == 'text':
-            with open('messages.txt', 'a') as mess:
-                mess.write(
-                    str(msg.chat.id) + ' ' + msg.chat.first_name + ': ' + msg.text.replace('\n', ' <3 ') + '\n')
-                mess.close()
-
-
 bot = telebot.TeleBot(TOKEN)
-bot.set_update_listener(listener)
 
 
 @bot.message_handler(commands=['add_hw'])
@@ -110,7 +100,7 @@ def send_text(m):
 
     elif m.chat.id == current_chat and waiter is True:
         func.hw[current_lesson] = m.text
-        func.save()
+        # func.save()
         bot.send_message(m.chat.id, 'дз сохранено')
         reset()
 
@@ -128,5 +118,5 @@ def send_text(m):
         bot.send_message(m.chat.id, 'я не понял, что ты написал')
 
 
-func.load()
+# func.load()
 bot.polling(none_stop=True)

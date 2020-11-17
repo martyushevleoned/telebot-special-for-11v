@@ -1,7 +1,7 @@
 from telebot import types
 from datetime import datetime
 
-TOKEN = '1384356348:AAEX53xcrjNJzPcNxoAYOnsV3mQxzd5h0Hs'
+TOKEN = '1384356348:AAESTjVvu7m9XjA_DWlS8w-fPcUAYxeanh8'
 EDITORS = [976798046, 1311758742]
 BLACK_LIST = [470540326]
 
@@ -40,13 +40,13 @@ class DataBase:
                         sub[6],
                         sub[11]],
 
-        'вторник': [sub[1],
+        'вторник': [sub[8],
                     sub[15],
                     sub[8],
-                    sub[11],
+                    sub[1],
                     sub[2],
                     sub[12],
-                    sub[12]],
+                    sub[10]],
 
         'среда': [sub[2],
                   sub[2],
@@ -68,13 +68,13 @@ class DataBase:
                     sub[3],
                     sub[3],
                     sub[4],
-                    sub[10],
+                    sub[2],
                     sub[15]],
 
-        'суббота': [sub[9],
-                    sub[8],
+        'суббота': [sub[14],
+                    sub[9],
                     sub[4],
-                    sub[14]]
+                    sub[8]]
     }
 
     # timetable
