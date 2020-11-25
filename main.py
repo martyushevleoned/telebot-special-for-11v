@@ -29,17 +29,7 @@ def reset():
     waiter = False
 
 
-def listener(m):
-    for msg in m:
-        if msg.content_type == 'text':
-            with open('messages.txt', 'a') as mess:
-                mess.write(
-                    str(msg.chat.id) + ' ' + msg.chat.first_name + ': ' + msg.text.replace('\n', ' <3 ') + '\n')
-                mess.close()
-
-
 bot = telebot.TeleBot(TOKEN)
-bot.set_update_listener(listener)
 
 
 @bot.message_handler(commands=['add_hw'])
@@ -105,6 +95,8 @@ def handler_call(call):
 # text
 @bot.message_handler(content_types=['text'])
 def send_text(m):
+    m.text = m.text.replace('@special_for_11v_telebot', '')
+
     if m.chat.id in BLACK_LIST:
         bot.send_message(m.chat.id, 'тебе здесь не рады')
 
