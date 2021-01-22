@@ -6,7 +6,7 @@ EDITORS = [976798046, 1311758742, 413549520]
 BLACK_LIST = [470540326]
 
 
-class DataBase:
+class Func(object):
     # subjects
     sub = [
         'обж',  # 0
@@ -14,14 +14,14 @@ class DataBase:
         'физика',  # 2
         'алгебра',  # 3
         'история',  # 4
-        'геометрия',  # 5
-        'экономика',  # 6
-        'география',  # 7
+        'география',  # 5
+        'геометрия',  # 6
+        'экономика',  # 7
         'литература',  # 8
-        'информатика',  # 9
-        'физкультура',  # 10
-        'правоведение',  # 11
-        'русский язык',  # 12
+        'физкультура',  # 9
+        'русский язык',  # 10
+        'информатика',  # 11
+        'правоведение',  # 12
         'обществознание',  # 13
         'иностранный язык',  # 14
         'практикум по математике'  # 15
@@ -36,43 +36,42 @@ class DataBase:
                         sub[14],
                         sub[3],
                         sub[3],
-                        sub[8],
-                        sub[6],
-                        sub[11]],
+                        sub[2],
+                        sub[7],
+                        sub[12]],
 
-        'вторник': [sub[8],
+        'вторник': [sub[15],
                     sub[15],
-                    sub[8],
-                    sub[1],
                     sub[2],
-                    sub[12],
-                    sub[10]],
+                    sub[1],
+                    sub[8],
+                    sub[10],
+                    sub[9]],
 
         'среда': [sub[2],
-                  sub[2],
+                  sub[11],
                   sub[14],
-                  sub[12],
-                  sub[12],
-                  sub[9]],
+                  sub[10],
+                  sub[10],
+                  sub[8],
+                  sub[10]],
 
-        'четверг': [sub[13],
+        'четверг': [sub[9],
+                    sub[13],
                     sub[13],
                     sub[2],
-                    sub[10],
-                    sub[7],
                     sub[5],
-                    sub[5]],
+                    sub[6],
+                    sub[6]],
 
-        'пятница': [sub[9],
-                    sub[9],
+        'пятница': [sub[11],
+                    sub[11],
                     sub[3],
                     sub[3],
-                    sub[4],
-                    sub[2],
-                    sub[15]],
+                    sub[4]],
 
         'суббота': [sub[14],
-                    sub[9],
+                    sub[11],
                     sub[4],
                     sub[8]]
     }
@@ -87,16 +86,18 @@ class DataBase:
                  '7) 13:45 - 14:25']
 
     # methods
-    def timetable_out(self):
+    @classmethod
+    def timetable_out(cls):
         answer = ''
-        for time in range(len(self.timetable)):
-            answer += self.timetable[time]
+        for time in range(len(cls.timetable)):
+            answer += cls.timetable[time]
             answer += '\n'
         return answer
 
-    def schedule_out(self):
+    @classmethod
+    def schedule_out(cls):
         answer = ''
-        for k, v in self.schedule.items():
+        for k, v in cls.schedule.items():
             answer += k.capitalize() + '\n'
             count = 1
             for s in v:
@@ -105,55 +106,64 @@ class DataBase:
             answer += '\n'
         return answer
 
-    def tomorrow_hw_out(self):
-        return self.day_hw_out(datetime.today().isoweekday())
+    @classmethod
+    def tomorrow_hw_out(cls):
+        return cls.day_hw_out(datetime.today().isoweekday())
 
-    def all_hw_out(self):
+    @classmethod
+    def all_hw_out(cls):
         answer = ''
-        for k, v in self.hw.items():
+        for k, v in cls.hw.items():
             answer += k.capitalize() + '\n'
             answer += v + '\n' + '\n'
         return answer
 
-    def day_hw_out(self, date):
+    @classmethod
+    def day_hw_out(cls, date):
         date %= 7
         if date == 6:
             date = 0
-        answer = list(self.schedule.keys())[date].capitalize()
+        answer = list(cls.schedule.keys())[date].capitalize()
         answer += '\n' + '\n'
         count = 1
-        for s in self.schedule[list(self.schedule.keys())[date]]:
+        for s in cls.schedule[list(cls.schedule.keys())[date]]:
             answer += f'{count}) {s.capitalize()}\n'
-            answer += self.hw[s] + '\n' + '\n'
+            answer += cls.hw[s] + '\n' + '\n'
             count += 1
         return answer
 
-    def save(self):
-        with open('data.txt', 'w') as file:
-            for v in self.hw.values():
-                file.write(str(v).replace('\n', ' <3 ') + '\n')
-            file.close()
+    @classmethod
+    def download_hw(cls):
+        answer = ''
+        for v in cls.hw.values():
+            answer += v.replace('\n', ' <3 ') + '\n'
+        return answer
 
-    def load(self):
-        with open('data.txt', 'r') as file:
-            for line in self.sub:
-                self.hw[line] = file.readline().replace('\n', '')
-                self.hw[line] = self.hw[line].replace(' <3 ', '\n')
-            file.close()
+    @classmethod
+    def upload_hw(cls, text):
+        try:
+            counter = 0
+            for i in text.splitlines():
+                if '/upload_hw' in i:
+                    continue
+                cls.hw[cls.sub[counter]] = i.replace(' <3 ', '\n')
+                counter += 1
+                print(i)
+            print(cls.hw)
+        except Exception:
+            print('ну бывает')
 
 
-func = DataBase()
+class Keyboard(object):
+    day_key = types.InlineKeyboardMarkup()
+    day_key.add(types.InlineKeyboardButton(text='понедельник', callback_data='0'))
+    day_key.add(types.InlineKeyboardButton(text='вторник', callback_data='1'))
+    day_key.add(types.InlineKeyboardButton(text='среда', callback_data='2'))
+    day_key.add(types.InlineKeyboardButton(text='четверг', callback_data='3'))
+    day_key.add(types.InlineKeyboardButton(text='пятница', callback_data='4'))
+    day_key.add(types.InlineKeyboardButton(text='суббота', callback_data='5'))
 
-day_key = types.InlineKeyboardMarkup()
-day_key.add(types.InlineKeyboardButton(text='понедельник', callback_data='0'))
-day_key.add(types.InlineKeyboardButton(text='вторник', callback_data='1'))
-day_key.add(types.InlineKeyboardButton(text='среда', callback_data='2'))
-day_key.add(types.InlineKeyboardButton(text='четверг', callback_data='3'))
-day_key.add(types.InlineKeyboardButton(text='пятница', callback_data='4'))
-day_key.add(types.InlineKeyboardButton(text='суббота', callback_data='5'))
-
-# keyboards
-sub_key = types.InlineKeyboardMarkup()
-for i in func.sub:
-    sub_key.add(types.InlineKeyboardButton(text=i, callback_data=i))
-sub_key.add(types.InlineKeyboardButton(text='выход', callback_data='exit'))
+    sub_key = types.InlineKeyboardMarkup()
+    for i in Func.sub:
+        sub_key.add(types.InlineKeyboardButton(text=i, callback_data=i))
+    sub_key.add(types.InlineKeyboardButton(text='выход', callback_data='exit'))
