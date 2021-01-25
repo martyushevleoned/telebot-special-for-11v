@@ -10,7 +10,7 @@ messages = {
 
 commands = {
     '/day_hw': 'bot.send_message(m.chat.id, "выберите день", reply_markup=Keyboard.day_key)',
-    '/start': 'bot.send_message(m.chat.id, "нажмите /")'
+    '/start': 'bot.send_message(m.chat.id, "серьёзно?")'
 }
 
 bot = telebot.TeleBot(TOKEN)
@@ -97,38 +97,41 @@ def handler_call(call):
 def send_text(m):
     m.text = m.text.replace('@special_for_11v_telebot', '')
 
-    if m.chat.id in BLACK_LIST:
-        bot.send_message(m.chat.id, 'тебе здесь не рады')
+    if m.from_user.is_bot is False:
+        bot.send_message(-385288047, m.from_user.username + '\n' + m.text)
 
-    elif m.chat.id == current_chat and waiter is True:
-        Func.hw[current_lesson] = m.text
-        bot.send_message(m.chat.id, 'дз сохранено')
-        bot.send_message(976798046, Func.download_hw())
-        reset()
+        if m.chat.id in BLACK_LIST:
+            bot.send_message(m.chat.id, 'тебе здесь не рады')
 
-    elif m.text in messages.keys():
-        bot.send_message(m.chat.id, eval(messages[m.text]))
-
-    elif m.text in commands:
-        eval(commands[m.text])
-
-    elif m.chat.id in EDITORS:
-        if m.text == '/reset':
+        elif m.chat.id == current_chat and waiter is True:
+            Func.hw[current_lesson] = m.text
+            bot.send_message(m.chat.id, 'дз сохранено')
+            bot.send_message(-373136347, Func.download_hw())
             reset()
-            bot.send_message(m.chat.id, 'success')
 
-        elif m.text == '/download_hw':
-            bot.send_message(m.chat.id, Func.download_hw())
+        elif m.text in messages.keys():
+            bot.send_message(m.chat.id, eval(messages[m.text]))
 
-        elif '/upload_hw' in m.text:
-            Func.upload_hw(m.text)
-            bot.send_message(m.chat.id, Func.all_hw_out())
+        elif m.text in commands:
+            eval(commands[m.text])
+
+        elif m.chat.id in EDITORS:
+            if m.text == '/reset':
+                reset()
+                bot.send_message(m.chat.id, 'success')
+
+            elif m.text == '/download_hw':
+                bot.send_message(m.chat.id, Func.download_hw())
+
+            elif '/upload_hw' in m.text:
+                Func.upload_hw(m.text)
+                bot.send_message(m.chat.id, Func.all_hw_out())
+
+            else:
+                bot.send_message(m.chat.id, 'я не понял, что ты написал')
 
         else:
             bot.send_message(m.chat.id, 'я не понял, что ты написал')
-
-    else:
-        bot.send_message(m.chat.id, 'я не понял, что ты написал')
 
 
 bot.polling(none_stop=True)

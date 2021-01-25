@@ -30,6 +30,7 @@ class Func(object):
     # homework
     hw = dict.fromkeys(sub, '-')
 
+
     # schedule
     schedule = {
         'понедельник': [sub[0],
@@ -148,8 +149,6 @@ class Func(object):
                     continue
                 cls.hw[cls.sub[counter]] = i.replace(' <3 ', '\n')
                 counter += 1
-                print(i)
-            print(cls.hw)
         except Exception:
             print('ну бывает')
 
