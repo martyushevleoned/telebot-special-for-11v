@@ -95,9 +95,9 @@ def handler_call(call):
 
 @bot.message_handler(content_types=['text'])
 def send_text(m):
-    m.text = m.text.replace('@special_for_11v_telebot', '')
-
     if m.from_user.is_bot is False:
+
+        m.text = m.text.replace('@special_for_11v_telebot', '')
         bot.send_message(-385288047, m.from_user.username + '\n' + m.text)
 
         if m.chat.id in BLACK_LIST:
