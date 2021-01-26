@@ -41,7 +41,7 @@ class Func(object):
                         sub[7],
                         sub[12]],
 
-        'вторник': [sub[15],
+        'вторник': [sub[11],
                     sub[15],
                     sub[2],
                     sub[1],
@@ -50,7 +50,7 @@ class Func(object):
                     sub[9]],
 
         'среда': [sub[2],
-                  sub[11],
+                  sub[15],
                   sub[14],
                   sub[10],
                   sub[10],
