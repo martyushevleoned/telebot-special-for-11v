@@ -98,7 +98,7 @@ def send_text(m):
     if m.from_user.is_bot is False:
 
         m.text = m.text.replace('@special_for_11v_telebot', '')
-        bot.send_message(-385288047, m.from_user.username + '\n' + m.text)
+        bot.send_message(-385288047, m.from_user.first_name + '\n' + m.text)
 
         if m.chat.id in BLACK_LIST:
             bot.send_message(m.chat.id, 'тебе здесь не рады')
