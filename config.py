@@ -1,7 +1,7 @@
 from telebot import types
 from datetime import datetime
 
-TOKEN = '1384356348:AAHvlCs2SFQCUepV5CsI6yqA5tk65pWSt7E'
+TOKEN = '1384356348:AAGDOU40P1qFeMTR-8Vy7j5FJl0PEXiPO_w'
 EDITORS = [976798046, 1311758742, 413549520]
 BLACK_LIST = [470540326]
 
@@ -52,23 +52,23 @@ class Func(object):
         'среда': [sub[2],
                   sub[15],
                   sub[14],
-                  sub[10],
-                  sub[10],
-                  sub[8],
-                  sub[10]],
+                  sub[6],
+                  sub[6],
+                  sub[8]],
 
         'четверг': [sub[9],
                     sub[13],
                     sub[13],
                     sub[2],
                     sub[5],
-                    sub[6],
-                    sub[6]],
+                    sub[10]],
 
         'пятница': [sub[11],
                     sub[11],
+                    sub[10],
                     sub[3],
                     sub[3],
+                    sub[10],
                     sub[4]],
 
         'суббота': [sub[14],

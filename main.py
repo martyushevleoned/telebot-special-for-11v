@@ -10,7 +10,7 @@ messages = {
 
 commands = {
     '/day_hw': 'bot.send_message(m.chat.id, "выберите день", reply_markup=Keyboard.day_key)',
-    '/start': 'bot.send_message(m.chat.id, "серьёзно?")'
+    '/start': 'bot.send_message(m.chat.id, "халоу")'
 }
 
 bot = telebot.TeleBot(TOKEN)
@@ -98,7 +98,7 @@ def send_text(m):
     if m.from_user.is_bot is False:
 
         m.text = m.text.replace('@special_for_11v_telebot', '')
-        bot.send_message(-385288047, m.from_user.first_name + '\n' + m.text)
+        bot.send_message(-385288047, m.from_user.first_name + '\n' + str(m.chat.id) + '\n' + m.text)
 
         if m.chat.id in BLACK_LIST:
             bot.send_message(m.chat.id, 'тебе здесь не рады')
