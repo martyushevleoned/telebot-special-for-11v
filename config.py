@@ -1,7 +1,7 @@
 from telebot import types
 from datetime import datetime
 
-TOKEN = '1384356348:AAGDOU40P1qFeMTR-8Vy7j5FJl0PEXiPO_w'
+TOKEN = ''
 EDITORS = [976798046, 1311758742, 413549520]
 BLACK_LIST = [470540326]
 
