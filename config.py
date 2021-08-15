@@ -2,8 +2,8 @@ from telebot import types
 from datetime import datetime
 
 TOKEN = ''
-EDITORS = [976798046, 1311758742, 413549520]
-BLACK_LIST = [470540326]
+EDITORS = []
+BLACK_LIST = []
 
 
 class Func(object):
